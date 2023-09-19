@@ -33,26 +33,30 @@ function hendleClick(event) {
 
 };
 
-function openCloseModal(description,target) {
-  
+function openCloseModal(description, target) {
   const instance = basicLightbox.create(`
-  <div class="modal">
-    <img
-      src=${target}
-      alt=${description}
-      width="800" height="500"
-    />
-  </div>
+    <div class="modal">
+      <img
+        src="${target}"
+        alt="${description}"
+        width="800" height="500"
+      />
+    </div>
   `, {
-    onShow: (instance)=>{galleryEl.addEventListener("keydown", escModal)},
-    onclose: (instance)=>{galleryEl.removeEventListener("keydown", escModal)}
+    onShow: instance => {
+      galleryEl.addEventListener("keydown", escModal);
+    },
+    onClose: instance => {
+      galleryEl.removeEventListener("keydown", escModal);
+    }
   });
+  
   instance.show();
 
   function escModal(evt) {
-     if (evt.code === 'Escape') {
+    if (evt.code === 'Escape') {
       instance.close();
     }
-  };
+  }
 
 };
